@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import AboutUs from "./AboutUs";
+import ProductList from "./ProductList";
+import { useSelector } from "react-redux";
+import { selectCartCount } from "./CartSlice";
 import "./App.css";
 
 function App() {
   const [page, setPage] = useState("home");
+  const cartCount = useSelector(selectCartCount);
 
   function goTo(nextPage) {
     setPage(nextPage);
@@ -46,7 +50,7 @@ function App() {
             Plants
           </a>
           <a href="#cart" onClick={(event) => { event.preventDefault(); goTo("cart"); }}>
-            Cart <span className="cart-count">0</span>
+            Cart <span className="cart-count">{cartCount}</span>
           </a>
         </nav>
       </header>
@@ -54,10 +58,7 @@ function App() {
       {page === "about" ? (
         <AboutUs />
       ) : page === "plants" ? (
-        <main className="product-page">
-          <h1>Our Houseplants</h1>
-          <p>Explore our plant collection. Product listings will appear here.</p>
-        </main>
+        <ProductList />
       ) : (
         <main className="cart-page">
           <h1>Shopping Cart</h1>
