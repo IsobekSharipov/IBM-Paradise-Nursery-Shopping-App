@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AboutUs from "./AboutUs";
 import ProductList from "./ProductList";
+import CartItem from "./CartItem";
 import { useSelector } from "react-redux";
 import { selectCartCount } from "./CartSlice";
 import "./App.css";
@@ -60,13 +61,7 @@ function App() {
       ) : page === "plants" ? (
         <ProductList />
       ) : (
-        <main className="cart-page">
-          <h1>Shopping Cart</h1>
-          <p>Your shopping cart is empty.</p>
-          <button type="button" className="primary-button" onClick={() => goTo("plants")}>
-            Continue Shopping
-          </button>
-        </main>
+        <CartItem onContinueShopping={() => goTo("plants")} />
       )}
     </>
   );
